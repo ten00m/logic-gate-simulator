@@ -5,6 +5,10 @@ import OutputNode from './nodes/OutputNode';
 import AndNode from './nodes/AndNode';
 import OrNode from './nodes/OrNode';
 import NotNode from './nodes/NotNode';
+import XorNode from './nodes/XorNode';
+import XnorNode from './nodes/XnorNode';
+import NandNode from './nodes/NandNode';
+import NorNode from './nodes/NorNode';
 import ConnectionLine from './ConnectionLine';
 
 interface CanvasProps {
@@ -535,6 +539,58 @@ export default function Canvas({
           if (node.type === 'not') {
             return (
               <NotNode
+                key={node.id}
+                node={node}
+                onDragStart={handleNodeDragStart}
+                onPortClick={handlePortClick}
+                canvasOffset={offset}
+                canvasScale={scale}
+                isSelected={isSelected}
+              />
+            );
+          }
+          if (node.type === 'xor') {
+            return (
+              <XorNode
+                key={node.id}
+                node={node}
+                onDragStart={handleNodeDragStart}
+                onPortClick={handlePortClick}
+                canvasOffset={offset}
+                canvasScale={scale}
+                isSelected={isSelected}
+              />
+            );
+          }
+          if (node.type === 'xnor') {
+            return (
+              <XnorNode
+                key={node.id}
+                node={node}
+                onDragStart={handleNodeDragStart}
+                onPortClick={handlePortClick}
+                canvasOffset={offset}
+                canvasScale={scale}
+                isSelected={isSelected}
+              />
+            );
+          }
+          if (node.type === 'nand') {
+            return (
+              <NandNode
+                key={node.id}
+                node={node}
+                onDragStart={handleNodeDragStart}
+                onPortClick={handlePortClick}
+                canvasOffset={offset}
+                canvasScale={scale}
+                isSelected={isSelected}
+              />
+            );
+          }
+          if (node.type === 'nor') {
+            return (
+              <NorNode
                 key={node.id}
                 node={node}
                 onDragStart={handleNodeDragStart}

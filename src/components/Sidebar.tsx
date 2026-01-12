@@ -106,6 +106,122 @@ const logicMenuItems: MenuItem[] = [
       </svg>
     ),
   },
+  {
+    type: 'xor',
+    label: 'XOR',
+    icon: (
+      <svg viewBox="0 0 45 40" className="w-8 h-8">
+        {/* Корпус XOR: вогнутая левая сторона + выпуклая правая (похож на OR но с двойной линией слева) */}
+        <path
+          d="M12 10 Q16 20 12 30 L15 30 Q25 30 30 20 Q25 10 15 10 Z"
+          fill="currentColor"
+          opacity="0.2"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        {/* Дополнительная линия слева для XOR */}
+        <path
+          d="M10 10 Q12 20 10 30"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        {/* Входы */}
+        <line x1="4" y1="16" x2="10" y2="16" stroke="currentColor" strokeWidth="2" />
+        <line x1="4" y1="24" x2="10" y2="24" stroke="currentColor" strokeWidth="2" />
+        <circle cx="4" cy="16" r="2" fill="currentColor" />
+        <circle cx="4" cy="24" r="2" fill="currentColor" />
+        {/* Выход */}
+        <line x1="30" y1="20" x2="37" y2="20" stroke="currentColor" strokeWidth="2" />
+        <circle cx="37" cy="20" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    type: 'nand',
+    label: 'NAND',
+    icon: (
+      <svg viewBox="0 0 45 40" className="w-8 h-8">
+        {/* Корпус NAND: как AND + пузырь инверсии */}
+        <path
+          d="M10 10 H22 A10 10 0 0 1 22 30 H10 Z"
+          fill="currentColor"
+          opacity="0.2"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        {/* Кружок инверсии */}
+        <circle cx="33" cy="20" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+        {/* Входы */}
+        <line x1="4" y1="16" x2="10" y2="16" stroke="currentColor" strokeWidth="2" />
+        <line x1="4" y1="24" x2="10" y2="24" stroke="currentColor" strokeWidth="2" />
+        <circle cx="4" cy="16" r="2" fill="currentColor" />
+        <circle cx="4" cy="24" r="2" fill="currentColor" />
+        {/* Выход */}
+        <line x1="36" y1="20" x2="45" y2="20" stroke="currentColor" strokeWidth="2" />
+        <circle cx="43" cy="20" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    type: 'nor',
+    label: 'NOR',
+    icon: (
+      <svg viewBox="0 0 40 40" className="w-8 h-8">
+        {/* Корпус NOR: как OR + пузырь инверсии */}
+        <path
+          d="M10 10 Q15 20 10 30 L15 30 Q25 30 30 20 Q25 10 15 10 Z"
+          fill="currentColor"
+          opacity="0.2"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        {/* Кружок инверсии */}
+        <circle cx="32" cy="20" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+        {/* Входы */}
+        <line x1="4" y1="16" x2="10" y2="16" stroke="currentColor" strokeWidth="2" />
+        <line x1="4" y1="24" x2="10" y2="24" stroke="currentColor" strokeWidth="2" />
+        <circle cx="4" cy="16" r="2" fill="currentColor" />
+        <circle cx="4" cy="24" r="2" fill="currentColor" />
+        {/* Выход */}
+        <line x1="35" y1="20" x2="37" y2="20" stroke="currentColor" strokeWidth="2" />
+        <circle cx="37" cy="20" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    type: 'xnor',
+    label: 'XNOR',
+    icon: (
+      <svg viewBox="0 0 45 40" className="w-8 h-8">
+        {/* Корпус XNOR: как XOR + пузырь инверсии */}
+        <path
+          d="M12 10 Q16 20 12 30 L15 30 Q25 30 30 20 Q25 10 15 10 Z"
+          fill="currentColor"
+          opacity="0.2"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        {/* Дополнительная линия слева для XNOR */}
+        <path
+          d="M10 10 Q12 20 10 30"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        {/* Кружок инверсии */}
+        <circle cx="33" cy="20" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+        {/* Входы */}
+        <line x1="4" y1="16" x2="10" y2="16" stroke="currentColor" strokeWidth="2" />
+        <line x1="4" y1="24" x2="10" y2="24" stroke="currentColor" strokeWidth="2" />
+        <circle cx="4" cy="16" r="2" fill="currentColor" />
+        <circle cx="4" cy="24" r="2" fill="currentColor" />
+        {/* Выход */}
+        <line x1="36" y1="20" x2="37" y2="20" stroke="currentColor" strokeWidth="2" />
+        <circle cx="37" cy="20" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Sidebar({ onDragStart }: SidebarProps) {

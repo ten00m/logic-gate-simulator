@@ -131,6 +131,134 @@ export function createNode(type: NodeType, position: { x: number; y: number }): 
         ],
       };
 
+    case 'xor':
+      return {
+        id,
+        type,
+        position,
+        inputPorts: [
+          {
+            id: generatePortId(id, 'in', 0),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+          {
+            id: generatePortId(id, 'in', 1),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+        outputPorts: [
+          {
+            id: generatePortId(id, 'out', 0),
+            nodeId: id,
+            type: 'output',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+      };
+
+    case 'nand':
+      return {
+        id,
+        type,
+        position,
+        inputPorts: [
+          {
+            id: generatePortId(id, 'in', 0),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+          {
+            id: generatePortId(id, 'in', 1),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+        outputPorts: [
+          {
+            id: generatePortId(id, 'out', 0),
+            nodeId: id,
+            type: 'output',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+      };
+
+    case 'nor':
+      return {
+        id,
+        type,
+        position,
+        inputPorts: [
+          {
+            id: generatePortId(id, 'in', 0),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+          {
+            id: generatePortId(id, 'in', 1),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+        outputPorts: [
+          {
+            id: generatePortId(id, 'out', 0),
+            nodeId: id,
+            type: 'output',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+      };
+
+    case 'xnor':
+      return {
+        id,
+        type,
+        position,
+        inputPorts: [
+          {
+            id: generatePortId(id, 'in', 0),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+          {
+            id: generatePortId(id, 'in', 1),
+            nodeId: id,
+            type: 'input',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+        outputPorts: [
+          {
+            id: generatePortId(id, 'out', 0),
+            nodeId: id,
+            type: 'output',
+            position: { x: 0, y: 0 },
+            value: false,
+          },
+        ],
+      };
+
     default:
       return {
         id,
