@@ -163,7 +163,7 @@ export default function Canvas({
         });
       }
 
-      // Перетаскивание ноды (только в режиме pan)
+      // Перетаскивание ноды в режиме pan
       if (draggingNodeId && containerRef.current && canvasMode === 'pan') {
         const rect = containerRef.current.getBoundingClientRect();
         const x = (e.clientX - rect.left - offset.x) / scale - dragOffset.x;
@@ -171,8 +171,41 @@ export default function Canvas({
 
         onUpdateNode(draggingNodeId, { position: { x, y } });
       }
+
+      // Перетаскивание выделенных нод в режиме select
+      if (draggingNodeId && containerRef.current && canvasMode === 'select') {
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left - offset.x) / scale - dragOffset.x;
+        const y = (e.clientY - rect.top - offset.y) / scale - dragOffset.y;
+
+        const node = nodes.find((n) => n.id === draggingNodeId);
+        if (node) {
+          // Вычисляем смещение для этого узла
+          const deltaX = x - node.position.x;
+          const deltaY = y - node.position.y;
+
+          // Применяем смещение ко всем выделенным узлам
+          selectedNodeIds.forEach((nodeId) => {
+            const selectedNode = nodes.find((n) => n.id === nodeId);
+            if (selectedNode) {
+              onUpdateNode(nodeId, {
+                position: {
+                  x: selectedNode.position.x + deltaX,
+                  y: selectedNode.position.y + deltaY,
+                },
+              });
+            }
+          });
+
+          // Обновляем позицию главного узла для следующего кадра
+          setDragOffset({
+            x: (e.clientX - rect.left - offset.x) / scale - x,
+            y: (e.clientY - rect.top - offset.y) / scale - y,
+          });
+        }
+      }
     },
-    [isPanning, panStart, draggingNodeId, dragOffset, offset, scale, onUpdateNode, selectionBox, canvasMode]
+    [isPanning, panStart, draggingNodeId, dragOffset, offset, scale, onUpdateNode, selectionBox, canvasMode, nodes, selectedNodeIds]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -230,15 +263,23 @@ export default function Canvas({
       const mouseX = (e.clientX - rect.left - offset.x) / scale;
       const mouseY = (e.clientY - rect.top - offset.y) / scale;
 
-      // В режиме select - выделяем узел
+      // В режиме select - выделяем узел и готовимся к перемещению
       if (canvasMode === 'select') {
         if (e.shiftKey || e.ctrlKey) {
           // Ctrl/Shift + клик добавляет к выделению
-          setSelectedNodeIds((prev) => new Set([...prev, nodeId]));
+          const newSelected = new Set([...selectedNodeIds, nodeId]);
+          setSelectedNodeIds(newSelected);
         } else {
           // Обычный клик выделяет только этот узел
           setSelectedNodeIds(new Set([nodeId]));
         }
+        
+        // Начинаем перемещение узла (или группы выделенных узлов)
+        setDraggingNodeId(nodeId);
+        setDragOffset({
+          x: mouseX - node.position.x,
+          y: mouseY - node.position.y,
+        });
         return;
       }
 
@@ -248,7 +289,7 @@ export default function Canvas({
         y: mouseY - node.position.y,
       });
     },
-    [nodes, offset, scale, canvasMode]
+    [nodes, offset, scale, canvasMode, selectedNodeIds]
   );
 
   // Обработка начала соединения (клик на порт)
